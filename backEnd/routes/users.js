@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const { User } = require('../models');
 const sha256 = require('js-sha256');
+const verifyINT = require('../middlewares/auth');
 
-router.get('/', async (req, res) => {
+router.get('/', verifyINT, async (req, res) => {
     const users = await User.findAll({
         attributes:['name', 'email']
     });
